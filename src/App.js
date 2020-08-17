@@ -19,9 +19,9 @@ function App() {
               Login
             </NavLink>
             <br></br>
-            <NavLink activeClassName="active" to="/dashboard">
+            {/* <NavLink activeClassName="active" to="/dashboard">
               Dashboard
-            </NavLink>
+            </NavLink> */}
           </div>
           <div className="content">
             <Switch>
