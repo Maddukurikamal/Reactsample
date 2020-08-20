@@ -1,80 +1,67 @@
 import React, { useState, useEffect } from "react";
-
+import "./Login.css";
 import axios from "axios";
-
-// function Dashboard(props) {
-// handle click event of logout button
-// const handleLogout = () => {
-//   props.history.push("/login");
-// };
-
-//   return (
-//     // <div>
-//     //   Welcome User!
-//     //   <br />
-//     //   <br />
-//     //   <input type="button" onClick={handleLogout} value="Logout" />
-//     // </div>
-//   // );
-// }
-
-const Dashboard = (props) => {
-  const handleLogout = () => {
-    props.history.push("/login");
+//import { render } from "@testing-library/react";
+function Dashboard() {
+  const [post, setPost] = useState([]);
+  const [id, setId] = useState(1);
+  //const data = [post];
+  const url = "https://reqres.in/api/users?page=" + id;
+  const handleclick = () => {
+    setId(id + 1);
   };
-  const url = "https://reqres.in/api/users";
+  const handleback = () => {
+    setId(id - 1);
+  };
 
-  const [data, setData] = useState([]);
-
+  const Fetchdetails = (props) => {
+    props.history.push("/list-of-users" + setId(id));
+  };
   useEffect(() => {
-    axios.get(url).then((json) => setData(json.data.data));
-  }, []);
-  //console.log(data);
-  const renderTable = () => {
-    return Object.keys(data).map((key, i) => {
-      //console.log(users)
-      return (
-        <tr key={i}>
-          <td>
-            <center>{data[key].id}</center>
-          </td>
-          <td>
-            <center>{data[key].email}</center>
-          </td>
-          <td>
-            <center>{data[key].first_name}</center>
-          </td>
-          <td>
-            <center>{data[key].last_name}</center>
-          </td>
-        </tr>
-      );
-    });
-  };
-
+    axios
+      .get(url)
+      .then((res) => {
+        console.log(res);
+        setPost(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
   return (
     <div>
-      Welcome User !
-      <br />
-      <br />
-      {<input type="button" onClick={handleLogout} value="Logout" />}
-      <h1 id="title">Fecthed Details from the API</h1>
-      <table striped bordered hover variant="dark">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>
-              <center>Email</center>
-            </th>
-            <th>First Name</th>
-            <th>Last Name</th>
-          </tr>
-        </thead>
-        <tbody>{renderTable()}</tbody>
-      </table>
+      <h5 className="header-style">User Details</h5>
+      {post.map((data) => (
+        <div classname="card" onClick={Fetchdetails} key={data.id}>
+          <div className="card">
+            <div className="card-body">
+              <center>
+                <div className="card-text">
+                  {data.first_name} {data.last_name}
+                </div>
+              </center>
+
+              <div className="card-text">
+                <center>
+                  <img src={data.avatar}></img>
+                </center>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      {
+        <button type="button-model" onClick={handleclick}>
+          NEXT
+        </button>
+      }
+      {
+        <button classname="button-model" type="button" onClick={handleback}>
+          PREVIOUS
+        </button>
+      }
     </div>
   );
-};
-
-//ReactDOM.render(<App />, document.getElementById("root"));
+}
 export default Dashboard;
