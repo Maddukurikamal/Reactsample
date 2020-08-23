@@ -1,14 +1,12 @@
 import React from "react";
 import "./Login.css";
 import Login from "./Login";
+import Users from "./Users";
 
 import Home from "./Home";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-//import UserData from "./UserData";
 import "./App.css";
 
-//import UserData from "./UserData";
-import Repo from "./Dashboard";
 import Dashboard from "./Dashboard";
 
 function App() {
@@ -20,8 +18,9 @@ function App() {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Login} />
-              <Route path="/dashboard" component={Dashboard} />
-              <Route path="/User" component={Dashboard} />
+              <Route exact path="/dashboard" component={Dashboard} />
+
+              <Route path="/dashboard/:id" component={Users} />
             </Switch>
           </div>
         </div>

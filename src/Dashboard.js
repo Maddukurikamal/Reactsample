@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from "react";
 import "./Login.css";
 import axios from "axios";
-//import { render } from "@testing-library/react";
-function Dashboard() {
+
+export function Dashboard(props) {
   const [post, setPost] = useState([]);
   const [id, setId] = useState(1);
-  //const data = [post];
   const url = "https://reqres.in/api/users?page=" + id;
-  const handleclick = () => {
-    setId(id + 1);
+  const handlenext = () => {
+    if (id >= 2) {
+      alert("No data");
+    } else {
+      setId(id + 1);
+    }
   };
   const handleback = () => {
-    setId(id - 1);
+    if (id <= 1) {
+      alert("404: No data found");
+    } else {
+      setId(id - 1);
+    }
   };
-
-  const Fetchdetails = (props) => {
-    props.history.push("/list-of-users" + setId(id));
+  const Fetchdetails = (id) => {
+    console.log(id);
+    props.history.push("/dashboard/" + id);
   };
   useEffect(() => {
     axios
@@ -30,34 +37,32 @@ function Dashboard() {
   }, [id]);
   return (
     <div>
-      <h5 className="header-style">User Details</h5>
+      <header>
+        <h1>USER DETAILS</h1>
+      </header>
       {post.map((data) => (
-        <div classname="card" onClick={Fetchdetails} key={data.id}>
+        <div classname="card" onClick={() => Fetchdetails(data.id)}>
           <div className="card">
             <div className="card-body">
-              <center>
-                <div className="card-text">
-                  {data.first_name} {data.last_name}
-                </div>
-              </center>
-
               <div className="card-text">
-                <center>
-                  <img src={data.avatar}></img>
-                </center>
+                <h1>
+                  {data.first_name} {data.last_name}
+                </h1>
               </div>
+
+              <img className="imagefont1" src={data.avatar}></img>
             </div>
           </div>
         </div>
       ))}
 
       {
-        <button type="button-model" onClick={handleclick}>
+        <button type="button" onClick={handlenext}>
           NEXT
         </button>
       }
       {
-        <button classname="button-model" type="button" onClick={handleback}>
+        <button type="button" onClick={handleback}>
           PREVIOUS
         </button>
       }

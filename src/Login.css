@@ -71,11 +71,10 @@ code {
 }
 
 .card {
-  display: ruby-text-container;
-  width: 50%;
-  height: 100%;
+  float: left;
+  width: 25%;
+  height: 350px;
   box-shadow: 2px 2px 2px 2px;
-  align-content: center;
   padding: 20px;
   margin: 20px;
   background-color: whitesmoke;
@@ -92,5 +91,32 @@ code {
   font-family: "Ubuntu", sans-serif;
 }
 .header-style {
-  color: white;
+  color: black;
+}
+
+.imagefont {
+  height: 300px;
+  width: 300px;
+  box-shadow: 2px 2px 2px 2px;
+  box-sizing: content-box;
+  border-radius: 10%;
+}
+.email {
+  font-style: italic;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+.imagefont1 {
+  height: 250px;
+  width: 300px;
+  box-shadow: 2px 2px 2px 2px;
+  box-sizing: content-box;
+  border-radius: 10%;
+}
+.email {
+  font-style: italic;
+}
+
+.card-text {
+  font-style: italic;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
